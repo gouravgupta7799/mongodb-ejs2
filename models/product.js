@@ -2,12 +2,13 @@ const mongodb = require('mongodb');
 const getdb = require('../util/dataBase').getdb;
 
 class Product {
-  constructor(id, title, imageUrl, description, price) {
+  constructor(id, title, imageUrl, description, price,userId) {
     this._id = id;
     this.title = title;
     this.imageUrl = imageUrl;
     this.description = description;
     this.price = price;
+    this.userId = userId;
   }
 
   save() {
