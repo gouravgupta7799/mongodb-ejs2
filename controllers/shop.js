@@ -57,44 +57,50 @@ exports.getCart = (req, res, next) => {
 
 exports.postCart = (req, res, next) => {
   const prodId = req.body.productId;
-  let fecthcart;
-  req.user.getCart()
-    .then(cart => {
-      fecthcart = cart;
-      return cart.getProducts()
-    })
-    .then(products => {
-      let product;
-      if (products.length > 0) {
-        product = products[0]
-      }
-      let newQuantity = 1;
-      if (product) {
-        const oldQuntity = product.cartItem.quantity;
-        newQuantity = oldQuntity + 1
-        return Product.findByPk(prodId)
-          .then(product => {
-            return fecthcart.addProduct(product, {
-              through: {
-                quantity: newQuantity
-              }
-            });
-          })
-      }
+  Product.findById(prodId)
+    .then(product => {
+    return req.user.addToCart(product)
+    }).then(result => {
+    console.log(result)
+  })
+  // let fecthcart;
+  // req.user.getCart()
+  //   .then(cart => {
+  //     fecthcart = cart;
+  //     return cart.getProducts()
+  //   })
+  //   .then(products => {
+  //     let product;
+  //     if (products.length > 0) {
+  //       product = products[0]
+  //     }
+  //     let newQuantity = 1;
+  //     if (product) {
+  //       const oldQuntity = product.cartItem.quantity;
+  //       newQuantity = oldQuntity + 1
+  //       return Product.findByPk(prodId)
+  //         .then(product => {
+  //           return fecthcart.addProduct(product, {
+  //             through: {
+  //               quantity: newQuantity
+  //             }
+  //           });
+  //         })
+  //     }
 
-      return Product.findByPk(prodId)
-        .then(product => {
-          return fecthcart.addProduct(product, {
-            through: {
-              quantity: newQuantity
-            }
-          });
-        })
-        .catch(err => console.log(err))
-    })
-    .catch(err => console.log(err))
+  //     return Product.findByPk(prodId)
+  //       .then(product => {
+  //         return fecthcart.addProduct(product, {
+  //           through: {
+  //             quantity: newQuantity
+  //           }
+  //         });
+  //       })
+  //       .catch(err => console.log(err))
+  //   })
+  //   .catch(err => console.log(err))
 
-    .then(res.redirect('/cart'))
+  //   .then(res.redirect('/cart'))
 }
 
 exports.postCartDeleteProduct = (req, res, next) => {
