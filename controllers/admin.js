@@ -20,7 +20,6 @@ exports.postAddProduct = (req, res, next) => {
   const product = new Product(null, title, imageUrl, description, price, req.user._id)
   product.save()
     .then(result => {
-      // console.log(result)
       console.log('created product')
       res.redirect('/products')
     })
@@ -59,7 +58,7 @@ exports.postEditProduct = (req, res, next) => {
   return prod.save()
 
     .then(result => {
-      console.log('updated product')
+      // console.log('updated product')
       res.redirect('/admin/products')
     })
     .catch(err => console.log(err))

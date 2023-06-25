@@ -22,7 +22,7 @@ class Product {
 
     return dbop
       .then(result => {
-        console.log(result)
+        // console.log(result)
       })
       .catch(err => console.log(err))
   }
@@ -31,7 +31,7 @@ class Product {
     const db = getdb();
     return db.collection('products').find().toArray()
       .then(product => {
-        console.log(product)
+        // console.log(product)
         return product;
       })
       .catch(err => console.log(err))
@@ -39,10 +39,9 @@ class Product {
 
   static findById(prodId) {
     const db = getdb();
-    console.log(prodId)
     return db.collection('products').find({ _id: new mongodb.ObjectId(prodId) }).next()
       .then(product => {
-        console.log(product);
+        // console.log(product);
         return product;
       })
       .catch(err => console.log(err))
