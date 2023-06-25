@@ -97,7 +97,9 @@ class User {
 
   seeOrder() {
     const db = getdb();
-    return db.collection('orders').find().toArray()
+    return db.collection('orders')
+      .find({ 'users._id': new mongodb.ObjectId(this._id) })
+      .toArray()
   }
 
   static findById(userId) {

@@ -74,7 +74,7 @@ exports.postCartDeleteProduct = (req, res, next) => {
 exports.postOrders = (req, res, next) => {
   req.user.addOrder()
     .then(result => {
-    res.redirect('/Orders')
+      res.redirect('/Orders')
     }).catch(err => {
       console.log(err)
     })
@@ -82,13 +82,15 @@ exports.postOrders = (req, res, next) => {
 
 exports.getOrders = (req, res, next) => {
   req.user.seeOrder()
-    .then(result => {
-      console.log(result)
+    .then(order1 => {
+      // console.log(order1)
+      res.render('shop/orders', {
+        path: '/orders',
+        pageTitle: 'Your Orders',
+        orders: order1
+      });
     })
-  res.render('shop/orders', {
-    path: '/orders',
-    pageTitle: 'Your Orders'
-  });
+    .catch(err => console.log(err))
 };
 
 exports.getCheckout = (req, res, next) => {
