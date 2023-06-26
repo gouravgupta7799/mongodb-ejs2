@@ -21,6 +21,11 @@ const productSchma = new Schma({
     type: String,
     require: true 
   },
+  userId: {
+    type: Schma.Types.ObjectId,
+    ref: 'User',
+    require:true
+  }
 
 })
 
