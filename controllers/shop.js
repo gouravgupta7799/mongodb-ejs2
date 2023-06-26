@@ -2,7 +2,7 @@ const Product = require('../models/product.js');
 // const cart = require('../models/cart.js');
 
 exports.getProducts = (req, res, next) => {
-  Product.fatchAll()
+  Product.find()
     .then(row => {
       res.render('shop/product-list', {
         prods: row,
@@ -27,7 +27,7 @@ exports.gtProduct = (req, res, next) => {
 }
 
 exports.getIndex = (req, res, next) => {
-  Product.fatchAll()
+  Product.find()
     .then(row => {
       res.render('shop/index', {
         prods: row,
