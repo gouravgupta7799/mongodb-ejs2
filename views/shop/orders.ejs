@@ -15,15 +15,15 @@
                                         order - # <%= order._id %>
                                     </h2>
                                     <ul class="orders__products">
-                                        <% order.items.forEach(product=>{%>
+                                        <% order.products.forEach(product=>{%>
                                             <li class="ord">
-                                                <%=product.title %> (<%= product.quantity %>)
+                                                <%=product.product.title %> (<%= product.quantity %>)
                                             </li>
                                             <%}) %>
                                                 })
                                     </ul>
                                 </li>
                                 <% }) %>
-                        <% } %>
+                                    <% } %>
             </main>
             <%- include('../includes/end.ejs') %>
