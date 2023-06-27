@@ -48,4 +48,12 @@ userSchma.methods.addToCart = function (product) {
   return this.save()
 }
 
+userSchma.methods.deleteCartItem = function (prodIds) {
+  const updatedCartItems = this.cart.items.filter(product => {
+    return product.productId.toString() !== prodIds.toString()
+  })
+  this.cart = updatedCartItems;
+  return this.save()
+}
+
 module.exports = mongoose.model('User', userSchma)
